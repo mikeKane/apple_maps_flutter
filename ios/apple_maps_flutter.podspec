@@ -15,7 +15,10 @@ A new flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-
+  s.dependency 'lottie-ios'
+  # s.preserve_paths = 'lottie-ios.framework'
+  # s.xcconfig = { 'OTHER_LDFLAGS' => '-framework lottie-ios.framework' }
+  # s.vendored_frameworks = 'lottie-ios.framework'
   s.ios.deployment_target = '9.0'
   s.swift_version = '5.0'
 end

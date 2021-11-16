@@ -149,6 +149,7 @@ class Annotation {
     this.anchor = const Offset(0.5, 1.0),
     this.draggable = false,
     this.icon = BitmapDescriptor.defaultAnnotation,
+    this.lottieFile = null,
     this.infoWindow = InfoWindow.noText,
     this.position = const LatLng(0.0, 0.0),
     this.onTap,
@@ -177,6 +178,8 @@ class Annotation {
   /// A description of the bitmap used to draw the annotation icon.
   final BitmapDescriptor icon;
 
+  final String? lottieFile;
+
   /// An Apple Maps InfoWindow.
   ///
   /// The window is displayed when the annotation is tapped.
@@ -201,6 +204,7 @@ class Annotation {
     bool? consumeTapEventsParam,
     bool? draggableParam,
     BitmapDescriptor? iconParam,
+    String? lottieFileParam,
     InfoWindow? infoWindowParam,
     LatLng? positionParam,
     bool? visibleParam,
@@ -213,6 +217,7 @@ class Annotation {
       alpha: alphaParam ?? alpha,
       draggable: draggableParam ?? draggable,
       icon: iconParam ?? icon,
+      lottieFile: lottieFileParam ?? lottieFile,
       infoWindow: infoWindowParam ?? infoWindow,
       position: positionParam ?? position,
       onTap: onTapParam ?? onTap,
@@ -235,6 +240,7 @@ class Annotation {
     addIfPresent('anchor', _offsetToJson(anchor));
     addIfPresent('draggable', draggable);
     addIfPresent('icon', icon._toJson());
+    addIfPresent('lottieFile', lottieFile);
     addIfPresent('infoWindow', infoWindow._toJson());
     addIfPresent('visible', visible);
     addIfPresent('position', position._toJson());
@@ -255,7 +261,7 @@ class Annotation {
   @override
   String toString() {
     return 'Annotation{annotationId: $annotationId, alpha: $alpha, draggable: $draggable,'
-        'icon: $icon, infoWindow: $infoWindow, position: $position ,visible: $visible, onTap: $onTap}';
+        'icon: $icon, lottieFile: $lottieFile, infoWindow: $infoWindow, position: $position ,visible: $visible, onTap: $onTap}';
   }
 }
 

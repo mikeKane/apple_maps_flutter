@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import Lottie
 
 public class AppleMapController: NSObject, FlutterPlatformView {
     var mapView: FlutterMapView
@@ -331,6 +332,32 @@ extension AppleMapController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         } else if let flutterAnnotation = annotation as? FlutterAnnotation {
+            if flutterAnnotation.lottieFile != nil {
+                var anVview: ImageAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "imageAnnotation") as? ImageAnnotationView
+                if anVview == nil {
+                     anVview = ImageAnnotationView(annotation: annotation, reuseIdentifier: "imageAnnotation")
+                } else {
+                    anVview?.annotation = flutterAnnotation
+                 }
+                for views in anVview!.subviews {
+                    views.removeFromSuperview()
+                }
+                anVview?.image = nil
+                anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
+                let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
+                                    ofType: "json") ?? ""
+                let animation = Animation.filepath(path)
+                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                let lottieAnimationView = AnimationView(animation: animation)
+                lottieAnimationView.backgroundBehavior = .pauseAndRestore
+                lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: mapLottieView.frame.width * 2, height: mapLottieView.frame.height * 2)
+                mapLottieView.addSubview(lottieAnimationView)
+                anVview?.addSubview(mapLottieView)
+                lottieAnimationView.loopMode = .loop
+                lottieAnimationView.play()
+                return anVview
+            }
             return self.getAnnotationView(annotation: flutterAnnotation)
         }
         return nil

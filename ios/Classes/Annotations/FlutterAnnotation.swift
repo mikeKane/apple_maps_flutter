@@ -22,6 +22,7 @@ class FlutterAnnotation: NSObject, MKAnnotation {
     var isVisible: Bool? = true
     var calloutOffset: Offset = Offset()
     var icon: AnnotationIcon = AnnotationIcon.init()
+    var lottieFile: String?
     
     public init(fromDictionary annotationData: Dictionary<String, Any>, registrar: FlutterPluginRegistrar) {
         let position :Array<Double> = annotationData["position"] as! Array<Double>
@@ -30,6 +31,7 @@ class FlutterAnnotation: NSObject, MKAnnotation {
         let long: Double = position[1]
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = infoWindow["title"] as? String
+        self.lottieFile =  annotationData["lottieFile"] as? String
         self.subtitle = infoWindow["snippet"] as? String
         self.infoWindowConsumesTapEvents = infoWindow["consumesTapEvents"] as? Bool ?? false
         self.id = annotationData["annotationId"] as? String

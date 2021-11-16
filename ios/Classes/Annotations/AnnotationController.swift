@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import Lottie
 
 extension AppleMapController: AnnotationDelegate {
 
@@ -15,7 +16,10 @@ extension AppleMapController: AnnotationDelegate {
         var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         let oldflutterAnnoation = annotationView?.annotation as? FlutterAnnotation
         if annotationView == nil || oldflutterAnnoation?.icon.iconType != annotation.icon.iconType {
-            if annotation.icon.iconType == IconType.PIN {
+            if (annotation.lottieFile != nil) {
+                NSLog("Were calling native lottie! \(annotation.lottieFile!)")
+               annotationView = getCustomLottieAnnotationView(annotation: annotation, id: identifier, lottieFile: annotation.lottieFile!)
+            } else if annotation.icon.iconType == IconType.PIN {
                 annotationView = getPinAnnotationView(annotation: annotation, id: identifier)
             } else if annotation.icon.iconType == IconType.MARKER {
                 annotationView = getMarkerAnnotationView(annotation: annotation, id: identifier)
@@ -185,6 +189,39 @@ extension AppleMapController: AnnotationDelegate {
         }
         annotationView?.image = annotation.icon.image
         return annotationView!
+    }
+
+     private func getCustomLottieAnnotationView(annotation: FlutterAnnotation, id: String, lottieFile: String) -> MKAnnotationView {
+         NSLog("getCustomLottieAnnotationView")
+         var anVview: ImageAnnotationView?
+        if anVview == nil {
+            anVview = ImageAnnotationView(annotation: annotation, reuseIdentifier: "imageAnnotation")
+        } else {
+            anVview?.annotation = annotation
+        }
+
+        if #available(iOS 11.0, *) {
+            self.mapView.register(ImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: id)
+            // anVview = ImageAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: "imageAnnotation") as? ImageAnnotationView
+        } else {
+             anVview?.annotation = annotation
+        }
+
+        anVview?.canShowCallout = true
+        anVview?.image = nil
+        anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
+        let jsonName = lottieFile
+        let animation = Animation.named("intro_location")
+        let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let lottieAnimationView = AnimationView(animation: animation)
+        lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: mapLottieView.frame.width * 2, height: mapLottieView.frame.height * 2)
+        mapLottieView.addSubview(lottieAnimationView)
+        anVview?.addSubview(mapLottieView)
+        lottieAnimationView.loopMode = .loop
+        lottieAnimationView.play()
+
+        return anVview!
     }
 
     private func getInfoWindowXOffset(annotationView: MKAnnotationView, annotation: FlutterAnnotation) -> CGFloat {
