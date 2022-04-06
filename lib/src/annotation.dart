@@ -149,7 +149,7 @@ class Annotation {
     this.anchor = const Offset(0.5, 1.0),
     this.draggable = false,
     this.icon = BitmapDescriptor.defaultAnnotation,
-    this.lottieFile = null,
+    this.lottieFile,
     this.infoWindow = InfoWindow.noText,
     this.position = const LatLng(0.0, 0.0),
     this.onTap,
@@ -265,22 +265,17 @@ class Annotation {
   }
 }
 
-Map<AnnotationId, Annotation> _keyByAnnotationId(
-    Iterable<Annotation>? annotations) {
+Map<AnnotationId, Annotation> _keyByAnnotationId(Iterable<Annotation>? annotations) {
   if (annotations == null) {
     return <AnnotationId, Annotation>{};
   }
-  return Map<AnnotationId, Annotation>.fromEntries(annotations.map(
-      (Annotation annotation) => MapEntry<AnnotationId, Annotation>(
-          annotation.annotationId, annotation)));
+  return Map<AnnotationId, Annotation>.fromEntries(annotations
+      .map((Annotation annotation) => MapEntry<AnnotationId, Annotation>(annotation.annotationId, annotation)));
 }
 
-List<Map<String, dynamic>>? _serializeAnnotationSet(
-    Set<Annotation>? annotations) {
+List<Map<String, dynamic>>? _serializeAnnotationSet(Set<Annotation>? annotations) {
   if (annotations == null) {
     return null;
   }
-  return annotations
-      .map<Map<String, dynamic>>((Annotation m) => m._toJson())
-      .toList();
+  return annotations.map<Map<String, dynamic>>((Annotation m) => m._toJson()).toList();
 }
