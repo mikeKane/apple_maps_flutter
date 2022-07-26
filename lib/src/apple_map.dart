@@ -167,8 +167,7 @@ class AppleMap extends StatefulWidget {
 }
 
 class _AppleMapState extends State<AppleMap> {
-  final Completer<AppleMapController> _controller =
-      Completer<AppleMapController>();
+  final Completer<AppleMapController> _controller = Completer<AppleMapController>();
 
   Map<AnnotationId, Annotation> _annotations = <AnnotationId, Annotation>{};
   Map<PolylineId, Polyline> _polylines = <PolylineId, Polyline>{};
@@ -195,8 +194,7 @@ class _AppleMapState extends State<AppleMap> {
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    return Text(
-        '$defaultTargetPlatform is not yet supported by the apple maps plugin');
+    return Text('$defaultTargetPlatform is not yet supported by the apple maps plugin');
   }
 
   @override
@@ -221,8 +219,7 @@ class _AppleMapState extends State<AppleMap> {
 
   void _updateOptions() async {
     final _AppleMapOptions newOptions = _AppleMapOptions.fromWidget(widget);
-    final Map<String, dynamic> updates =
-        _appleMapOptions.updatesMap(newOptions);
+    final Map<String, dynamic> updates = _appleMapOptions.updatesMap(newOptions);
     if (updates.isEmpty) {
       return;
     }
@@ -233,31 +230,27 @@ class _AppleMapState extends State<AppleMap> {
 
   void _updateAnnotations() async {
     final AppleMapController controller = await _controller.future;
-    controller._updateAnnotations(_AnnotationUpdates.from(
-        _annotations.values.toSet(), widget.annotations));
+    controller._updateAnnotations(_AnnotationUpdates.from(_annotations.values.toSet(), widget.annotations));
     _annotations = _keyByAnnotationId(widget.annotations);
   }
 
   void _updatePolylines() async {
     final AppleMapController controller = await _controller.future;
-    controller._updatePolylines(
-        _PolylineUpdates.from(_polylines.values.toSet(), widget.polylines));
+    controller._updatePolylines(_PolylineUpdates.from(_polylines.values.toSet(), widget.polylines));
     _polylines = _keyByPolylineId(widget.polylines);
   }
 
   void _updatePolygons() async {
     final AppleMapController controller = await _controller.future;
     // ignore: unawaited_futures
-    controller._updatePolygons(
-        _PolygonUpdates.from(_polygons.values.toSet(), widget.polygons));
+    controller._updatePolygons(_PolygonUpdates.from(_polygons.values.toSet(), widget.polygons));
     _polygons = _keyByPolygonId(widget.polygons);
   }
 
   void _updateCircles() async {
     final AppleMapController controller = await _controller.future;
     // ignore: unawaited_futures
-    controller._updateCircles(
-        _CircleUpdates.from(_circles.values.toSet(), widget.circles));
+    controller._updateCircles(_CircleUpdates.from(_circles.values.toSet(), widget.circles));
     _circles = _keyByCircleId(widget.circles);
   }
 
@@ -398,9 +391,7 @@ class _AppleMapOptions {
   Map<String, dynamic> updatesMap(_AppleMapOptions newOptions) {
     final Map<String, dynamic> prevOptionsMap = toMap();
 
-    return newOptions.toMap()
-      ..removeWhere(
-          (String key, dynamic value) => prevOptionsMap[key] == value);
+    return newOptions.toMap()..removeWhere((String key, dynamic value) => prevOptionsMap[key] == value);
   }
 
   List<double>? _serializePadding(EdgeInsets? insets) {

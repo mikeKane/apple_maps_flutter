@@ -37,16 +37,17 @@ public class AppleMapController: NSObject, FlutterPlatformView {
         self.channel = FlutterMethodChannel(name: "apple_maps_plugin.luisthein.de/apple_maps_\(id)", binaryMessenger: registrar.messenger())
         
         self.mapView = FlutterMapView(channel: channel, options: options)
-        if #available(iOS 13.0, *) {
-            self.mapView.cameraZoomRange = MKMapView.CameraZoomRange(
-                minCenterCoordinateDistance: 1000, // Minimum zoom value
-                maxCenterCoordinateDistance: 2000)
-        }
         self.registrar = registrar
         
         self.initialCameraPosition = args["initialCameraPosition"]! as! Dictionary<String, Any>
         
         super.init()
+
+        if #available(iOS 13.0, *) {
+                    self.mapView.cameraZoomRange = MKMapView.CameraZoomRange(
+                        minCenterCoordinateDistance: 200,
+                        maxCenterCoordinateDistance: 1000000)
+                }
         
         self.mapView.delegate = self
         self.mapView.setCenterCoordinate(initialCameraPosition, animated: false)
@@ -88,6 +89,7 @@ public class AppleMapController: NSObject, FlutterPlatformView {
     private func setMethodCallHandlers() {
         channel.setMethodCallHandler({ [unowned self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
             if let args :Dictionary<String, Any> = call.arguments as? Dictionary<String,Any> {
+                
                 switch(call.method) {
                 case "annotations#update":
                     self.annotationUpdate(args: args)
