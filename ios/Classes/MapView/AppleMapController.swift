@@ -333,39 +333,46 @@ extension AppleMapController: MKMapViewDelegate {
         self.currentlySelectedAnnotation = nil
         view.removeGestureRecognizer(self.onCalloutTapGestureRecognizer!)
     }
-
+    
     
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
         } else if let flutterAnnotation = annotation as? FlutterAnnotation {
-            if flutterAnnotation.lottieFile != nil {
-                var anVview: ImageAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "imageAnnotation") as? ImageAnnotationView
-                if anVview == nil {
-                     anVview = ImageAnnotationView(annotation: annotation, reuseIdentifier: "imageAnnotation")
-                } else {
-                    anVview?.annotation = flutterAnnotation
-                 }
-                for views in anVview!.subviews {
-                    views.removeFromSuperview()
+            DispatchQueue.global(qos: .background).async {
+                
+                if flutterAnnotation.lottieFile != nil {
+                    var anVview: ImageAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "imageAnnotation") as? ImageAnnotationView
+                    
+                    if anVview == nil {
+                        anVview = ImageAnnotationView(annotation: annotation, reuseIdentifier: "imageAnnotation")
+                    } else {
+                        anVview?.annotation = flutterAnnotation
+                    }
+                    for views in anVview!.subviews {
+                        views.removeFromSuperview()
+                    }
+                    anVview?.image = nil
+                    anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+                    
+                    let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
+                                                ofType: "json") ?? ""
+                    let animation = Animation.filepath(path)
+                    let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+                    let lottieAnimationView = AnimationView(animation: animation)
+                    lottieAnimationView.clipsToBounds = true
+                    lottieAnimationView.backgroundBehavior = .pauseAndRestore
+                    lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 40, height: 40)
+                    
+                    DispatchQueue.main.async {
+                        mapLottieView.addSubview(lottieAnimationView)
+                        mapLottieView.clipsToBounds = true
+                        anVview?.addSubview(mapLottieView)
+                        lottieAnimationView.loopMode = .loop
+                        lottieAnimationView.play()
+                        return anVview
+                    }
                 }
-                anVview?.image = nil
-                anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            
-                let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
-                                    ofType: "json") ?? ""
-                let animation = Animation.filepath(path)
-                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-                let lottieAnimationView = AnimationView(animation: animation)
-                lottieAnimationView.clipsToBounds = true
-                lottieAnimationView.backgroundBehavior = .pauseAndRestore
-                lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 40, height: 40)
-                mapLottieView.addSubview(lottieAnimationView)
-                mapLottieView.clipsToBounds = true
-                anVview?.addSubview(mapLottieView)
-                lottieAnimationView.loopMode = .loop
-                lottieAnimationView.play()
-                return anVview
             }
             return self.getAnnotationView(annotation: flutterAnnotation)
         }
