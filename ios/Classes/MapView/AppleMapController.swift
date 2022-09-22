@@ -34,6 +34,7 @@ public class AppleMapController: NSObject, FlutterPlatformView {
     
     public init(withFrame frame: CGRect, withRegistrar registrar: FlutterPluginRegistrar, withargs args: Dictionary<String, Any> ,withId id: Int64) {
         self.options = args["options"] as! [String: Any]
+        NSLog("Initializing map again - Kane")
         self.channel = FlutterMethodChannel(name: "apple_maps_plugin.luisthein.de/apple_maps_\(id)", binaryMessenger: registrar.messenger())
         
         self.mapView = FlutterMapView(channel: channel, options: options)
@@ -89,7 +90,7 @@ public class AppleMapController: NSObject, FlutterPlatformView {
     private func setMethodCallHandlers() {
         channel.setMethodCallHandler({ [unowned self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
             if let args :Dictionary<String, Any> = call.arguments as? Dictionary<String,Any> {
-                
+                NSLog("setMethodCallHandlers - Kane \(call.method)")
                 switch(call.method) {
                 case "annotations#update":
                     self.annotationUpdate(args: args)
@@ -182,6 +183,7 @@ public class AppleMapController: NSObject, FlutterPlatformView {
     private func annotationUpdate(args: Dictionary<String, Any>) -> Void {
         if let annotationsToAdd = args["annotationsToAdd"] as? NSArray {
             if annotationsToAdd.count > 0 {
+                NSLog("annotationsToAdd - Kane \(annotationsToAdd.count)")
                 self.annotationsToAdd(annotations: annotationsToAdd)
             }
         }
@@ -362,7 +364,7 @@ extension AppleMapController: MKMapViewDelegate {
                     let lottieAnimationView = AnimationView(animation: animation)
                     lottieAnimationView.clipsToBounds = true
                     lottieAnimationView.backgroundBehavior = .pauseAndRestore
-                    lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 40, height: 40)
+                    lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 150, height: 150)
                     
                     DispatchQueue.main.async {
                         mapLottieView.addSubview(lottieAnimationView)
