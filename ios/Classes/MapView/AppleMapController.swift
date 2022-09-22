@@ -370,7 +370,7 @@ extension AppleMapController: MKMapViewDelegate {
                 lottieAnimationView.backgroundBehavior = .pauseAndRestore
 //                lottieAnimationView.frame = CGRect(x: mapLottieView.frame.width / 2, y:  mapLottieView.frame.height / 2, width: 60, height: 60)
                 lottieAnimationView.center = CGPoint(x: mapLottieView.frame.size.width  / 2,
-                                                     y: mapLottieView.size.height / 2)
+                                                     y: mapLottieView.frame.size.height / 2)
                 lottieAnimationView.backgroundColor = .blue
                 mapLottieView.addSubview(lottieAnimationView)
 //                mapLottieView.clipsToBounds = true
