@@ -363,7 +363,7 @@ extension AppleMapController: MKMapViewDelegate {
                 let animation = Animation.filepath(path)
                 
                 let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-                mapLottieView.backgroundColor = .red
+//                mapLottieView.backgroundColor = .red
                 let lottieAnimationView = AnimationView(animation: animation)
                 
                 lottieAnimationView.clipsToBounds = true
@@ -372,7 +372,7 @@ extension AppleMapController: MKMapViewDelegate {
                 lottieAnimationView.center = CGPoint(x: mapLottieView.frame.size.width  / 2,
                                                      y: mapLottieView.frame.size.height / 2)
                 
-                lottieAnimationView.backgroundColor = .blue
+//                lottieAnimationView.backgroundColor = .blue
                 mapLottieView.addSubview(lottieAnimationView)
 //                mapLottieView.clipsToBounds = true
                 anVview?.addSubview(mapLottieView)
