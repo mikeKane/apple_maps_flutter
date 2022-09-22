@@ -367,7 +367,7 @@ extension AppleMapController: MKMapViewDelegate {
                 
                 lottieAnimationView.clipsToBounds = true
                 lottieAnimationView.backgroundBehavior = .pauseAndRestore
-                lottieAnimationView.frame = CGRect(x: -anVview.frame.width / 2, y: -anVview.frame.height / 2, width: anVview.frame.width / 2,, height: anVview.frame.width / 2)
+                lottieAnimationView.frame = CGRect(x: -anVview.frame.width / 2, y: -anVview.frame.height / 2, width: anVview.frame.width / 2, height: anVview.frame.width / 2)
                 
                 mapLottieView.addSubview(lottieAnimationView)
 //                mapLottieView.clipsToBounds = true
