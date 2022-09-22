@@ -356,19 +356,19 @@ extension AppleMapController: MKMapViewDelegate {
                     views.removeFromSuperview()
                 }
                 anVview?.image = nil
-                anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+                anVview?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
                 
                 let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
                                             ofType: "json") ?? ""
                 let animation = Animation.filepath(path)
                 
-                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
                 mapLottieView.backgroundColor = .red
                 let lottieAnimationView = AnimationView(animation: animation)
                 
                 lottieAnimationView.clipsToBounds = true
                 lottieAnimationView.backgroundBehavior = .pauseAndRestore
-                lottieAnimationView.frame = CGRect(x: mapLottieView.frame.width, y: mapLottieView.frame.height, width: 100, height: 100)
+                lottieAnimationView.frame = CGRect(x: mapLottieView.frame.width / 2, y:  mapLottieView.frame.height * 2, width: 60, height: 60)
                 lottieAnimationView.backgroundColor = .blue
                 mapLottieView.addSubview(lottieAnimationView)
 //                mapLottieView.clipsToBounds = true
