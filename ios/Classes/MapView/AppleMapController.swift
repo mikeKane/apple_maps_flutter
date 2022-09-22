@@ -362,13 +362,13 @@ extension AppleMapController: MKMapViewDelegate {
                                             ofType: "json") ?? ""
                 let animation = Animation.filepath(path)
                 
-                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+                let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                 mapLottieView.backgroundColor = .red
                 let lottieAnimationView = AnimationView(animation: animation)
                 
                 lottieAnimationView.clipsToBounds = true
                 lottieAnimationView.backgroundBehavior = .pauseAndRestore
-                lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 100, height: 100)
+                lottieAnimationView.frame = CGRect(x: mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: 100, height: 100)
                 lottieAnimationView.backgroundColor = .blue
                 mapLottieView.addSubview(lottieAnimationView)
 //                mapLottieView.clipsToBounds = true
