@@ -360,11 +360,11 @@ extension AppleMapController: MKMapViewDelegate {
                 
                 let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
                                             ofType: "json") ?? ""
-                let animation = Animation.filepath(path)
+                let animation = LottieAnimation.filepath(path)
                 
                 let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
 //                mapLottieView.backgroundColor = .red
-                let lottieAnimationView = AnimationView(animation: animation)
+                let lottieAnimationView = LottieAnimationView(animation: animation)
                 
                 lottieAnimationView.clipsToBounds = true
                 lottieAnimationView.backgroundBehavior = .pauseAndRestore

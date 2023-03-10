@@ -212,9 +212,9 @@ extension AppleMapController: AnnotationDelegate {
         anVview?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             
         let jsonName = lottieFile
-        let animation = Animation.named("intro_location")
+        let animation = LottieAnimation.named("intro_location")
         let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        let lottieAnimationView = AnimationView(animation: animation)
+        let lottieAnimationView = LottieAnimationView(animation: animation)
         lottieAnimationView.frame = CGRect(x: -mapLottieView.frame.width / 2, y: -mapLottieView.frame.height / 2, width: mapLottieView.frame.width * 2, height: mapLottieView.frame.height * 2)
         mapLottieView.addSubview(lottieAnimationView)
         anVview?.addSubview(mapLottieView)
