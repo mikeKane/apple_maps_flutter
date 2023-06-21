@@ -18,32 +18,23 @@ class _AnnotationUpdates {
       current = Set<Annotation>.identity();
     }
 
-    final Map<AnnotationId, Annotation> previousAnnotations =
-        _keyByAnnotationId(previous);
-    final Map<AnnotationId, Annotation> currentAnnotations =
-        _keyByAnnotationId(current);
+    final Map<AnnotationId, Annotation> previousAnnotations = _keyByAnnotationId(previous);
+    final Map<AnnotationId, Annotation> currentAnnotations = _keyByAnnotationId(current);
 
-    final Set<AnnotationId> prevAnnotationIds =
-        previousAnnotations.keys.toSet();
-    final Set<AnnotationId> currentAnnotationIds =
-        currentAnnotations.keys.toSet();
+    final Set<AnnotationId> prevAnnotationIds = previousAnnotations.keys.toSet();
+    final Set<AnnotationId> currentAnnotationIds = currentAnnotations.keys.toSet();
 
     Annotation idToCurrentAnnotation(AnnotationId id) {
       return currentAnnotations[id]!;
     }
 
-    final Set<AnnotationId> _annotationIdsToRemove =
-        prevAnnotationIds.difference(currentAnnotationIds);
+    final Set<AnnotationId> _annotationIdsToRemove = prevAnnotationIds.difference(currentAnnotationIds);
 
-    final Set<Annotation> _annotationsToAdd = currentAnnotationIds
-        .difference(prevAnnotationIds)
-        .map(idToCurrentAnnotation)
-        .toSet();
+    final Set<Annotation> _annotationsToAdd =
+        currentAnnotationIds.difference(prevAnnotationIds).map(idToCurrentAnnotation).toSet();
 
-    final Set<Annotation> _annotationsToChange = currentAnnotationIds
-        .intersection(prevAnnotationIds)
-        .map(idToCurrentAnnotation)
-        .toSet();
+    final Set<Annotation> _annotationsToChange =
+        currentAnnotationIds.intersection(prevAnnotationIds).map(idToCurrentAnnotation).toSet();
 
     annotationsToAdd = _annotationsToAdd;
     annotationIdsToRemove = _annotationIdsToRemove;
@@ -64,13 +55,8 @@ class _AnnotationUpdates {
     }
 
     addIfNonNull('annotationsToAdd', _serializeAnnotationSet(annotationsToAdd));
-    addIfNonNull(
-        'annotationsToChange', _serializeAnnotationSet(annotationsToChange));
-    addIfNonNull(
-        'annotationIdsToRemove',
-        annotationIdsToRemove
-            .map<dynamic>((AnnotationId m) => m.value)
-            .toList());
+    addIfNonNull('annotationsToChange', _serializeAnnotationSet(annotationsToChange));
+    addIfNonNull('annotationIdsToRemove', annotationIdsToRemove.map<dynamic>((AnnotationId m) => m.value).toList());
 
     return updateMap;
   }
@@ -86,8 +72,7 @@ class _AnnotationUpdates {
   }
 
   @override
-  int get hashCode =>
-      hashValues(annotationsToAdd, annotationIdsToRemove, annotationsToChange);
+  int get hashCode => Object.hash(annotationsToAdd, annotationIdsToRemove, annotationsToChange);
 
   @override
   String toString() {

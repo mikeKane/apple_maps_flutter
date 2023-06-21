@@ -8,7 +8,6 @@ import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'page.dart';
 
@@ -47,8 +46,7 @@ class ScrollingMapBody extends StatelessWidget {
                         target: center,
                         zoom: 11.0,
                       ),
-                      gestureRecognizers:
-                          <Factory<OneSequenceGestureRecognizer>>[
+                      gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
                         Factory<OneSequenceGestureRecognizer>(
                           () => EagerGestureRecognizer(),
                         ),
@@ -67,8 +65,7 @@ class ScrollingMapBody extends StatelessWidget {
                   const Text('This map doesn\'t consume the vertical drags.'),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 12.0),
-                    child: Text(
-                        'It still gets other gestures (e.g scale or tap).'),
+                    child: Text('It still gets other gestures (e.g scale or tap).'),
                   ),
                   Center(
                     child: SizedBox(
@@ -93,8 +90,7 @@ class ScrollingMapBody extends StatelessWidget {
                             )
                           ],
                         ),
-                        gestureRecognizers:
-                            <Factory<OneSequenceGestureRecognizer>>[
+                        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
                           Factory<OneSequenceGestureRecognizer>(
                             () => ScaleGestureRecognizer(),
                           ),

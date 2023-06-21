@@ -73,11 +73,10 @@ class CameraPosition {
   }
 
   @override
-  int get hashCode => hashValues(heading, target, pitch, zoom);
+  int get hashCode => Object.hash(heading, target, pitch, zoom);
 
   @override
-  String toString() =>
-      'CameraPosition(bearing: $heading, target: $target, tilt: $pitch, zoom: $zoom)';
+  String toString() => 'CameraPosition(bearing: $heading, target: $target, tilt: $pitch, zoom: $zoom)';
 }
 
 /// Defines a camera move, supporting absolute moves as well as moves relative

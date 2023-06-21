@@ -4,8 +4,6 @@
 
 import 'dart:async';
 import 'dart:math';
-import 'dart:typed_data';
-import 'dart:ui';
 import 'dart:ui' as ui;
 
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
@@ -58,8 +56,7 @@ class PlaceAnnotationBodyState extends State<PlaceAnnotationBody> {
     if (tappedAnnotation != null) {
       setState(() {
         if (annotations.containsKey(tappedAnnotation)) {
-          final Annotation resetOld =
-              annotations[selectedAnnotation]!.copyWith();
+          final Annotation resetOld = annotations[selectedAnnotation]!.copyWith();
           annotations[selectedAnnotation] = resetOld;
         }
         selectedAnnotation = annotationId;
@@ -142,8 +139,8 @@ class PlaceAnnotationBodyState extends State<PlaceAnnotationBody> {
 
   Future<void> _changeInfo() async {
     final Annotation annotation = annotations[selectedAnnotation]!;
-    final String newSnippet = annotation.infoWindow.snippet! +
-        (annotation.infoWindow.snippet!.length % 10 == 0 ? '\n' : '*');
+    final String newSnippet =
+        annotation.infoWindow.snippet! + (annotation.infoWindow.snippet!.length % 10 == 0 ? '\n' : '*');
     setState(() {
       annotations[selectedAnnotation] = annotation.copyWith(
         infoWindowParam: annotation.infoWindow.copyWith(
@@ -172,14 +169,10 @@ class PlaceAnnotationBodyState extends State<PlaceAnnotationBody> {
     });
   }
 
-  Future<void> _createAnnotationImageFromAsset(
-      BuildContext context, double devicelPixelRatio) async {
+  Future<void> _createAnnotationImageFromAsset(BuildContext context, double devicelPixelRatio) async {
     if (_annotationIcon == null) {
-      final ImageConfiguration imageConfiguration =
-          ImageConfiguration(devicePixelRatio: devicelPixelRatio);
-      BitmapDescriptor.fromAssetImage(
-              imageConfiguration, 'assets/red_square.png')
-          .then(_updateBitmap);
+      final ImageConfiguration imageConfiguration = ImageConfiguration(devicePixelRatio: devicelPixelRatio);
+      BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/red_square.png').then(_updateBitmap);
     }
   }
 
@@ -201,22 +194,16 @@ class PlaceAnnotationBodyState extends State<PlaceAnnotationBody> {
 
   Future<bool> _isInfoWindowShown() async {
     final Annotation annotation = annotations[selectedAnnotation]!;
-    print(
-        'Is InfowWindow visible: ${await this.controller.isMarkerInfoWindowShown(annotation.annotationId)}');
-    return (await this
-        .controller
-        .isMarkerInfoWindowShown(annotation.annotationId))!;
+    print('Is InfowWindow visible: ${await this.controller.isMarkerInfoWindowShown(annotation.annotationId)}');
+    return (await this.controller.isMarkerInfoWindowShown(annotation.annotationId))!;
   }
 
   Future<void> _getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    _iconFromBytes = BitmapDescriptor.fromBytes(
-        (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-            .buffer
-            .asUint8List());
+    _iconFromBytes =
+        BitmapDescriptor.fromBytes((await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List());
   }
 
   @override

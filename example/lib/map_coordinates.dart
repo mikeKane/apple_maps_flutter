@@ -4,7 +4,6 @@
 
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'page.dart';
 
@@ -79,8 +78,7 @@ class _MapCoordinatesBodyState extends State<_MapCoordinatesBody> {
       child: ElevatedButton(
         child: const Text('Get Visible Region Bounds'),
         onPressed: () async {
-          final LatLngBounds visibleRegion =
-              (await mapController?.getVisibleRegion())!;
+          final LatLngBounds visibleRegion = (await mapController?.getVisibleRegion())!;
           setState(() {
             _visibleRegion = visibleRegion;
           });

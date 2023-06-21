@@ -13,8 +13,7 @@ import 'apple_map_inspector.dart';
 import 'test_widgets.dart';
 
 const LatLng _kInitialMapCenter = LatLng(0, 0);
-const CameraPosition _kInitialCameraPosition =
-    CameraPosition(target: _kInitialMapCenter);
+const CameraPosition _kInitialCameraPosition = CameraPosition(target: _kInitialMapCenter);
 
 void main() {
   final Completer<String> allTestsCompleter = Completer<String>();
@@ -24,8 +23,7 @@ void main() {
 
   test('testCompassToggle', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -64,8 +62,7 @@ void main() {
 
   test('updateMinMaxZoomLevels', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     const MinMaxZoomPreference initialZoomLevel = MinMaxZoomPreference(2, 4);
     const MinMaxZoomPreference finalZoomLevel = MinMaxZoomPreference(3, 8);
@@ -107,8 +104,7 @@ void main() {
 
   test('testZoomGesturesEnabled', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -147,8 +143,7 @@ void main() {
 
   test('testRotateGesturesEnabled', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -187,8 +182,7 @@ void main() {
 
   test('testTiltGesturesEnabled', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -227,8 +221,7 @@ void main() {
 
   test('testScrollGesturesEnabled', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -330,8 +323,7 @@ void main() {
 
   test('testMyLocationButtonToggle', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -350,8 +342,7 @@ void main() {
     ));
 
     final AppleMapInspector inspector = await inspectorCompleter.future;
-    bool myLocationButtonEnabled =
-        (await inspector.isMyLocationButtonEnabled())!;
+    bool myLocationButtonEnabled = (await inspector.isMyLocationButtonEnabled())!;
     expect(myLocationButtonEnabled, true);
 
     await pumpWidget(Directionality(
@@ -373,8 +364,7 @@ void main() {
 
   test('testMyLocationButton initial value false', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -393,15 +383,13 @@ void main() {
     ));
 
     final AppleMapInspector inspector = await inspectorCompleter.future;
-    final bool myLocationButtonEnabled =
-        (await inspector.isMyLocationButtonEnabled())!;
+    final bool myLocationButtonEnabled = (await inspector.isMyLocationButtonEnabled())!;
     expect(myLocationButtonEnabled, false);
   });
 
   test('testMyLocationButton initial value true', () async {
     final Key key = GlobalKey();
-    final Completer<AppleMapInspector> inspectorCompleter =
-        Completer<AppleMapInspector>();
+    final Completer<AppleMapInspector> inspectorCompleter = Completer<AppleMapInspector>();
 
     await pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -420,8 +408,7 @@ void main() {
     ));
 
     final AppleMapInspector inspector = await inspectorCompleter.future;
-    final bool myLocationButtonEnabled =
-        (await inspector.isMyLocationButtonEnabled())!;
+    final bool myLocationButtonEnabled = (await inspector.isMyLocationButtonEnabled())!;
     expect(myLocationButtonEnabled, false);
   });
 }
