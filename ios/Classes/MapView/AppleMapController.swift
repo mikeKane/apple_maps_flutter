@@ -358,8 +358,11 @@ extension AppleMapController: MKMapViewDelegate {
                 anVview?.image = nil
                 anVview?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
                 
-                let path = Bundle.main.path(forResource: flutterAnnotation.lottieFile,
-                                            ofType: "json") ?? ""
+                let lottieFile = flutterAnnotation.lottieFile ?? ""
+                
+                let asset = self.registrar.lookupKey(forAsset: lottieFile)
+                
+                let path = Bundle.main.path(forResource: asset, ofType: "json") ?? ""
                 let animation = LottieAnimation.filepath(path)
                 
                 let mapLottieView = UIView.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))

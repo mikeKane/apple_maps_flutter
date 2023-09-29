@@ -1,7 +1,13 @@
+## 2.1.0
+
+* Be able to use lottie file from Flutter asset
+
 ## 1.0.1
 
 * Fixes memory leak
 * Adds ability to take snapshots of the map
+
+
 ## 1.0.0
 
 Thanks to @jonbhanson

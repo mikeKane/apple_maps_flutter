@@ -49,6 +49,7 @@ class AnnotationIconsBodyState extends State<AnnotationIconsBody> {
       Annotation(
         annotationId: AnnotationId("annotation_1"),
         anchor: Offset(0.5, -4),
+        lottieFile: "assets/intro_location",
         position: LatLng(52.707755, -2.7540658),
         icon: _annotationIcon ?? BitmapDescriptor.defaultAnnotation,
       ),
@@ -57,11 +58,8 @@ class AnnotationIconsBodyState extends State<AnnotationIconsBody> {
 
   Future<void> _createAnnotationImageFromAsset(BuildContext context) async {
     if (_annotationIcon == null) {
-      final ImageConfiguration imageConfiguration =
-          new ImageConfiguration(devicePixelRatio: 1.0);
-      BitmapDescriptor.fromAssetImage(
-              imageConfiguration, 'assets/test_marker.png')
-          .then(_updateBitmap);
+      final ImageConfiguration imageConfiguration = new ImageConfiguration(devicePixelRatio: 1.0);
+      BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/test_marker.png').then(_updateBitmap);
     }
   }
 
