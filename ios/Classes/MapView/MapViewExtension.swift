@@ -17,6 +17,10 @@ enum MapViewConstants: Double {
 public extension MKMapView {
     // keeps track of the Map values
     private struct Holder {
+        func disableAccessibility() {
+            self.isAccessibilityElement = false
+            self.accessibilityElementsHidden = true
+        }
         static var _zoomLevel: Double = Double(0)
         static var _pitch: CGFloat = CGFloat(0)
         static var _heading: CLLocationDirection = CLLocationDirection(0)

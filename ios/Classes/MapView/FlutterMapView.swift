@@ -38,6 +38,8 @@ class FlutterMapView: MKMapView, UIGestureRecognizerDelegate {
         self.init(frame: CGRect.zero)
         self.channel = channel
         self.options = options
+        self.isAccessibilityElement = false
+        self.accessibilityElementsHidden = true
         initialiseTapGestureRecognizers()
     }
     
